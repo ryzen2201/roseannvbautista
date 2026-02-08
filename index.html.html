@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tadhana • For Roseann V. Bautista</title>
+  <meta name="description" content="A small, heartfelt page inspired by the OPM song 'Tadhana' — made for Roseann V. Bautista." />
+  <style>
+    :root{
+      --bg1:#12050a;
+      --bg2:#1a070f;
+      --card:#14070fd6;
+      --stroke:#ffffff1a;
+      --text:#fff1f6;
+      --muted:#ffd0df;
+      --accent:#7a0f2a;   /* maroon */
+      --accent2:#ff5a8b;  /* rose */
+      --accent3:#ffb6c9;  /* soft pink */
+      --glow: 0 0 26px rgba(255,90,139,.25);
+      --radius: 22px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background: radial-gradient(1200px 700px at 15% 10%, rgba(122,15,42,.35), transparent 60%),
+                  radial-gradient(900px 600px at 85% 15%, rgba(255,90,139,.18), transparent 55%),
+                  radial-gradient(900px 650px at 50% 95%, rgba(255,182,201,.12), transparent 55%),
+                  linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    /* floating particles */
+    .stars{
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:.9;
+      filter: drop-shadow(0 0 10px rgba(255,90,139,.18));
+    }
+
+    /* floating hearts & flowers */
+    .float-layer{position:fixed; inset:0; pointer-events:none; overflow:hidden;}
+    .floater{
+      position:absolute;
+      bottom:-40px;
+      opacity:.18;
+      font-size: 22px;
+      animation: floatUp linear infinite;
+      filter: drop-shadow(0 0 14px rgba(255,90,139,.18));
+      user-select:none;
+    }
+    .heart{color: rgba(255,90,139,.85)}
+    .petal{color: rgba(255,182,201,.9)}
+
+    .floater:nth-child(1){left:8%;  animation-duration: 16s; font-size: 20px;}
+    .floater:nth-child(2){left:22%; animation-duration: 19s; font-size: 26px; opacity:.14}
+    .floater:nth-child(3){left:40%; animation-duration: 15s; font-size: 18px; opacity:.20}
+    .floater:nth-child(4){left:58%; animation-duration: 18s; font-size: 22px; opacity:.16}
+    .floater:nth-child(5){left:70%; animation-duration: 21s; font-size: 26px; opacity:.12}
+    .floater:nth-child(6){left:82%; animation-duration: 17s; font-size: 19px; opacity:.20}
+    .floater:nth-child(7){left:92%; animation-duration: 20s; font-size: 24px; opacity:.14}
+    .floater:nth-child(8){left:30%; animation-duration: 22s; font-size: 28px; opacity:.10}
+
+    @keyframes floatUp{
+      0%{transform: translateY(0) translateX(0) rotate(0deg)}
+      100%{transform: translateY(-120vh) translateX(30px) rotate(18deg)}
+    }
+
+    .wrap{
+      min-height:100%;
+      display:grid;
+      place-items:center;
+      padding:28px 16px 40px;
+    }
+
+    .container{
+      width:min(980px, 100%);
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:18px;
+    }
+
+    @media (max-width: 880px){
+      .container{grid-template-columns:1fr;}
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 60px rgba(0,0,0,.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(900px 260px at 20% 0%, rgba(122,15,42,.22), transparent 60%),
+                  radial-gradient(900px 260px at 80% 0%, rgba(255,90,139,.14), transparent 60%);
+      opacity:.85;
+      pointer-events:none;
+    }
+
+    .hero{
+      padding:28px 26px 22px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+      font-size:13px;
+      letter-spacing:.3px;
+      color: var(--muted);
+    }
+
+    .dot{
+      width:9px; height:9px;
+      border-radius:50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: var(--glow);
+    }
+
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(30px, 3.5vw, 46px);
+      line-height:1.08;
+      letter-spacing:-.5px;
+    }
+
+    .name{
+      background: linear-gradient(135deg, #ffffff, rgba(255,90,139,.92), rgba(122,15,42,.92));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      text-shadow: 0 0 24px rgba(124,92,255,.12);
+    }
+
+    .subtitle{
+      margin:0 0 18px;
+      color: rgba(234,240,255,.82);
+      font-size: 15.5px;
+      line-height:1.7;
+      max-width: 62ch;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 520px){
+      .grid{grid-template-columns:1fr;}
+    }
+
+    .mini{
+      padding:14px 14px;
+      border-radius:18px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.03);
+    }
+
+    .mini h3{
+      margin:0 0 6px;
+      font-size:14px;
+      color: rgba(234,240,255,.92);
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+
+    .mini p{
+      margin:0;
+      font-size: 13.5px;
+      color: rgba(185,198,255,.86);
+      line-height:1.55;
+    }
+
+    .right{
+      padding:22px 20px 18px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .panelTitle{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .panelTitle h2{
+      margin:0;
+      font-size:16px;
+      letter-spacing:.2px;
+    }
+
+    .chip{
+      font-size:12px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.03);
+      color: rgba(234,240,255,.78);
+    }
+
+    .quote{
+      position:relative;
+      padding:18px 16px 16px;
+      border-radius:18px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+    }
+
+    .quote::before{
+      content:"\201C";
+      position:absolute;
+      left:12px;
+      top:-10px;
+      font-size:64px;
+      opacity:.18;
+    }
+
+    .quote p{
+      margin:0;
+      color: rgba(234,240,255,.86);
+      line-height:1.65;
+      font-size: 14.2px;
+    }
+
+    .quote .sig{
+      margin-top: 10px;
+      color: rgba(185,198,255,.8);
+      font-size: 12.5px;
+    }
+
+    .controls{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 2px;
+    }
+
+    button{
+      cursor:pointer;
+      border:none;
+      border-radius: 14px;
+      padding: 11px 13px;
+      font-weight: 700;
+      letter-spacing:.2px;
+      color: rgba(255,255,255,.92);
+      background: rgba(122,15,42,.22);
+      border:1px solid rgba(255,90,139,.22);
+      box-shadow: 0 16px 40px rgba(0,0,0,.22);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+
+    button:hover{transform: translateY(-1px); background: rgba(122,15,42,.28); border-color: rgba(255,90,139,.28)}
+    button:active{transform: translateY(0px) scale(.99)}
+
+    .ghost{
+      background: rgba(255,255,255,.04);
+      border:1px solid var(--stroke);
+      color: rgba(234,240,255,.86);
+    }
+
+    .footer{
+      margin-top: 14px;
+      color: rgba(185,198,255,.7);
+      font-size: 12px;
+      line-height:1.6;
+    }
+
+    /* tiny toast */
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%) translateY(20px);
+      opacity:0;
+      pointer-events:none;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--stroke);
+      background: rgba(10,14,28,.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: rgba(234,240,255,.9);
+      font-size: 13px;
+      transition: opacity .2s ease, transform .2s ease;
+      box-shadow: 0 18px 60px rgba(0,0,0,.4);
+    }
+
+    .toast.show{opacity:1; transform: translateX(-50%) translateY(0px)}
+
+    /* subtle entrance */
+    .card{
+      animation: rise .7s ease both;
+    }
+
+    @keyframes rise{
+      from{transform: translateY(10px); opacity:0}
+      to{transform: translateY(0); opacity:1}
+    }
+
+    /* accessible reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .card{animation:none}
+      .stars{display:none}
+      button{transition:none}
+    }
+  
+
+    /* audio autoplay gate */
+    .audioGate{
+      position:fixed; inset:0;
+      display:grid;
+      place-items:center;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 50;
+      padding: 18px;
+    }
+    .audioGateCard{
+      width: min(420px, 100%);
+      border-radius: 22px;
+      border: 1px solid var(--stroke);
+      background: rgba(20,7,15,.88);
+      box-shadow: 0 22px 80px rgba(0,0,0,.55);
+      padding: 16px 16px 14px;
+    }
+    .audioGateTop{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .audioGateIcon{
+      width: 44px; height: 44px;
+      display:grid;
+      place-items:center;
+      border-radius: 16px;
+      background: rgba(122,15,42,.28);
+      border: 1px solid rgba(255,90,139,.22);
+      box-shadow: var(--glow);
+      font-size: 18px;
+    }
+    .audioGateTitle{font-weight: 800; letter-spacing: .2px}
+    .audioGateSub{color: rgba(255,208,223,.82); font-size: 13px; margin-top: 2px}
+    .audioGateBtn{
+      width: 100%;
+      border-radius: 16px;
+      padding: 12px 14px;
+      background: rgba(122,15,42,.30);
+      border: 1px solid rgba(255,90,139,.25);
+      color: rgba(255,241,246,.95);
+    }
+    .audioGateHint{
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(255,208,223,.65);
+      line-height: 1.45;
+      text-align:center;
+    }
+
+  </style>
+</head>
+<body>
+  <canvas class="stars" id="stars"></canvas>
+
+  <!-- floating hearts & petals -->
+  <div class="float-layer" aria-hidden="true">
+    <span class="floater heart">❤</span>
+    <span class="floater heart">❤</span>
+    <span class="floater heart">❤</span>
+    <span class="floater petal">❀</span>
+    <span class="floater petal">❀</span>
+    <span class="floater petal">❀</span>
+    <span class="floater petal">✿</span>
+    <span class="floater petal">✿</span>
+  </div>
+
+  <div class="wrap">
+    <div class="container">
+
+      <!-- LEFT: Main message -->
+      <section class="card hero">
+        <div class="badge">
+          <span class="dot"></span>
+          <span>Inspired by OPM • <strong>Tadhana</strong></span>
+        </div>
+
+        <h1>
+          Para kay
+          <span class="name">Roseann V. Bautista</span>
+        </h1>
+
+        <p class="subtitle">
+          Kung may araw na mabigat, gusto ko lang ipaalala sa’yo na hindi mo kailangan magtago para lang maging okay.
+          Hindi mo kasalanan ang mga bagay na hindi mo kontrolado. At kahit hindi pa tayo matagal nag-uusap,
+          I’m proud of you — sobra.
+        </p>
+
+        <div class="grid">
+          <div class="mini">
+            <h3>🌙 Gentle Reminder</h3>
+            <p>
+              You deserve <strong>respect</strong>, <strong>safety</strong>, at isang tahanang hindi mo kailangang katakutan.
+            </p>
+          </div>
+          <div class="mini">
+            <h3>🫶 Quiet Support</h3>
+            <p>
+              Kapag gusto mong maglabas ng sama ng loob, nandito lang ako — no judgment, just listening.
+            </p>
+          </div>
+          <div class="mini">
+            <h3>✨ Tadhana Vibe</h3>
+            <p>
+              Minsan, hindi mo kailangan ng perfect na love. Kailangan mo lang ng <strong>safe</strong> at <strong>totoo</strong>.
+            </p>
+          </div>
+          <div class="mini">
+            <h3>🧠 Real Talk</h3>
+            <p>
+              Ang trauma hindi mo kasalanan. Pero ang healing mo, deserve mo.
+            </p>
+          </div>
+        </div>
+
+        <div class="footer">
+          Tip: Click the buttons on the right for a small “Tadhana” moment ✨
+        </div>
+      </section>
+
+      <!-- RIGHT: Interactive panel -->
+      <aside class="card right">
+        <div class="panelTitle">
+          <h2>Little notes for you</h2>
+          <span class="chip" id="dateChip">Tonight</span>
+        </div>
+
+        <div class="quote" id="quoteBox">
+          <p id="quoteText">
+            “Kung may araw na pakiramdam mo mag-isa ka, tandaan mo: hindi ka nag-iisa.”
+          </p>
+          <div class="sig" id="quoteSig">— a quiet reminder</div>
+        </div>
+
+        <div class="controls">
+          <button id="btnNext">Next message</button>
+          <button class="ghost" id="btnCopy">Copy</button>
+          <button class="ghost" id="btnSpark">✨ Tadhana</button>
+        </div>
+
+        <div class="quote" style="margin-top:2px">
+          <p style="opacity:.9">
+            Click to play the song:
+            <br />
+            <a href="https://www.youtube.com/watch?v=51Jn7_lW58o&list=RD51Jn7_lW58o&start_radio=1" target="_blank" rel="noopener" style="color: rgba(255,208,223,.95); text-decoration: none; border-bottom: 1px dashed rgba(255,208,223,.35)">
+              ▶️ Tadhana — Up Dharma Down (YouTube)
+            </a>
+            <br />
+            <span style="color: rgba(255,208,223,.8)">Open it while reading this page.</span>
+          </p>
+        </div>
+
+        <div class="footer">
+          Made with care — simple, clean, and gentle.
+          <br />
+          By JJ Marzan
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Copied ✨</div>
+
+  <!-- Hidden audio (autoplay attempt) -->
+  <audio id="bgAudio" preload="auto" autoplay loop>
+    <source src="Adie - Tahanan (Official Lyric Video).mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Autoplay fallback modal -->
+  <div class="audioGate" id="audioGate" role="dialog" aria-modal="true" aria-labelledby="audioGateTitle" style="display:none">
+    <div class="audioGateCard">
+      <div class="audioGateTop">
+        <div class="audioGateIcon">❤</div>
+        <div>
+          <div class="audioGateTitle" id="audioGateTitle">For Roseann</div>
+          <div class="audioGateSub">Tap once to start the song ✨</div>
+        </div>
+      </div>
+      <button id="btnStartAudio" class="audioGateBtn">Play music</button>
+      <div class="audioGateHint">(Some browsers block autoplay until you tap.)</div>
+    </div>
+  </div>
+
+  <script>
+    // Date chip
+    const d = new Date();
+    const dateChip = document.getElementById('dateChip');
+    const options = { weekday: 'long', month: 'short', day: 'numeric' };
+    dateChip.textContent = d.toLocaleDateString(undefined, options);
+
+    // Quotes
+    const quotes = [
+      {
+        t: "‘Di mo deserve yung takot at sakit. You deserve peace.",
+        s: "— reminder"
+      },
+      {
+        t: "Ang pagiging strong mo, hindi mo kailangan patunayan araw-araw. Pwede kang mapagod.",
+        s: "— you’re human"
+      },
+      {
+        t: "Despite of all, matatag ka pa rin. At sobrang bilib ako doon.",
+        s: "— proud of you"
+      },
+      {
+        t: "Kung hindi ka pinili ng iba, piliin mo muna yung sarili mo.",
+        s: "— self-respect"
+      },
+      {
+        t: "Hindi lahat ng love kailangan itago. Darating yung love na safe.",
+        s: "— tadhana"
+      },
+      {
+        t: "Don’t cry na ha… 🤍 Andito lang ako.",
+        s: "— quiet support"
+      },
+      {
+        t: "May mga bagay na hindi mo kasalanan. Pero may future na pwede mong piliin.",
+        s: "— hope"
+      },
+      {
+        t: "Yung puso mong mabait kahit nasaktan ka, rare yun.",
+        s: "— admiration"
+      },
+      {
+        t: "You deserve a love that feels like home — hindi yung kailangan mong magtago.",
+        s: "— gentle love"
+      },
+      {
+        t: "Kung may tadhana, sana ito yung tadhana na pipiliin ka.",
+        s: "— maroon heart"
+      }
+    ];
+
+    let idx = 0;
+    const quoteText = document.getElementById('quoteText');
+    const quoteSig = document.getElementById('quoteSig');
+
+    function showQuote(i){
+      const q = quotes[i];
+      quoteText.textContent = "\u201C" + q.t + "\u201D";
+      quoteSig.textContent = q.s;
+    }
+
+    document.getElementById('btnNext').addEventListener('click', () => {
+      idx = (idx + 1) % quotes.length;
+      showQuote(idx);
+    });
+
+    // Copy
+    const toast = document.getElementById('toast');
+    function showToast(text){
+      toast.textContent = text;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1400);
+    }
+
+    document.getElementById('btnCopy').addEventListener('click', async () => {
+      const text = quoteText.textContent.replace(/^\u201C|\u201D$/g,'');
+      try{
+        await navigator.clipboard.writeText(text);
+        showToast('Copied ✨');
+      }catch(e){
+        showToast('Copy not supported');
+      }
+    });
+
+    // Tadhana sparkle
+    document.getElementById('btnSpark').addEventListener('click', () => {
+      const lines = [
+        "Kung ikaw ang tadhana, sana maging pahinga ka.",
+        "Kung hindi man ngayon, sana balang araw — safe na.",
+        "You deserve love that feels like home.",
+        "Hindi ka mahina. Napagod ka lang."
+      ];
+      const pick = lines[Math.floor(Math.random() * lines.length)];
+      quoteText.textContent = "\u201C" + pick + "\u201D";
+      quoteSig.textContent = "— tadhana";
+    });
+
+    // Init
+    showQuote(idx);
+
+    // Autoplay attempt (most browsers require user gesture)
+    const audio = document.getElementById('bgAudio');
+    const gate = document.getElementById('audioGate');
+    const btnStart = document.getElementById('btnStartAudio');
+
+    async function tryPlay(){
+      if(!audio) return;
+      try{
+        audio.volume = 0.85;
+        await audio.play();
+        if(gate) gate.style.display = 'none';
+      }catch(e){
+        if(gate) gate.style.display = 'grid';
+      }
+    }
+
+    // Try immediately
+    tryPlay();
+
+    // Fallback: tap to start
+    if(btnStart){
+      btnStart.addEventListener('click', async () => {
+        try{
+          await audio.play();
+          gate.style.display = 'none';
+        }catch(e){
+          // still blocked
+        }
+      });
+    }
+
+    // Extra fallback: any click anywhere
+    window.addEventListener('click', () => {
+      if(audio && audio.paused) tryPlay();
+    }, { once: true });
+
+    // Starfield background (lightweight)
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+
+    let w, h, stars;
+    function resize(){
+      w = canvas.width = window.innerWidth * devicePixelRatio;
+      h = canvas.height = window.innerHeight * devicePixelRatio;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+
+      const count = Math.min(180, Math.floor((window.innerWidth * window.innerHeight) / 9000));
+      stars = Array.from({length: count}, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: (Math.random() * 1.5 + 0.6) * devicePixelRatio,
+        a: Math.random() * 0.6 + 0.25,
+        s: (Math.random() * 0.35 + 0.08) * devicePixelRatio
+      }));
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function tick(){
+      ctx.clearRect(0,0,w,h);
+      for(const p of stars){
+        p.y += p.s;
+        if(p.y > h + 10) p.y = -10;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(234,240,255,${p.a})`;
+        ctx.fill();
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+  </script>
+</body>
+</html>
